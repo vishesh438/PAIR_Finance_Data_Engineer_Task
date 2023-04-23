@@ -75,27 +75,27 @@ print(query)
 print("Output of Above Query")
 print(start_time)
 
-#start_time = datetime.utcfromtimestamp(start_time).replace(minute=0, second=0, microsecond=0)
-#print(start_time)
-#
-#
-#
-#with psql_engine.connect() as conn:
-#    start_time = conn.execute(query).fetchone()[0]
-#    start_time = datetime.utcfromtimestamp(start_time).replace(minute=0, second=0, microsecond=0)
-#
-## Aggregate data per device per hour and store the results in MySQL
-#
-#while True:
-#    end_time = start_time.replace(hour=start_time.hour+1)
-#    if end_time > datetime.utcnow():
-#        break
-#    print(f"Aggregating data for {start_time}...")
-#    for device_id in psql_engine.execute("SELECT DISTINCT device_id FROM devices").fetchall():
-#        device_id = device_id[0]
-#        max_temp = get_max_temp_per_device_per_hour(device_id, start_time.timestamp(), end_time.timestamp())
-#        count = get_count_per_device_per_hour(device_id, start_time.timestamp(), end_time.timestamp())
-#        distance = get_distance_per_device_per_hour(device_id, start_time.timestamp(), end_time.timestamp())
-#        query = f"INSERT INTO device_aggregates (device_id, time, max_temp, count, distance) VALUES ('{device_id}', '{start_time}', {max_temp}, {count}, {distance})"
-#        mysql_engine.execute(query)
-#    start_time = end_time
+start_time = datetime.utcfromtimestamp(start_time).replace(minute=0, second=0, microsecond=0)
+print(start_time)
+
+
+
+with psql_engine.connect() as conn:
+    start_time = conn.execute(query).fetchone()[0]
+    start_time = datetime.utcfromtimestamp(start_time).replace(minute=0, second=0, microsecond=0)
+
+# Aggregate data per device per hour and store the results in MySQL
+
+while True:
+    end_time = start_time.replace(hour=start_time.hour+1)
+    if end_time > datetime.utcnow():
+        break
+    print(f"Aggregating data for {start_time}...")
+    for device_id in psql_engine.execute("SELECT DISTINCT device_id FROM devices").fetchall():
+        device_id = device_id[0]
+        max_temp = get_max_temp_per_device_per_hour(device_id, start_time.timestamp(), end_time.timestamp())
+        count = get_count_per_device_per_hour(device_id, start_time.timestamp(), end_time.timestamp())
+        distance = get_distance_per_device_per_hour(device_id, start_time.timestamp(), end_time.timestamp())
+        query = f"INSERT INTO device_aggregates (device_id, time, max_temp, count, distance) VALUES ('{device_id}', '{start_time}', {max_temp}, {count}, {distance})"
+        mysql_engine.execute(query)
+    start_time = end_time
