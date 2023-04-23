@@ -29,6 +29,7 @@ To run the analytics.py script, first make sure you have set the following envir
 Then, simply run the following command:
 
 ``` python analytics.py ``` 
+
 The script will start executing and will run indefinitely until manually stopped.
 
 ## Configuration
