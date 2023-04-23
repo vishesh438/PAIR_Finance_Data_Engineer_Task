@@ -4,7 +4,7 @@
 
 * This project involves pulling data from a PostgresSQL database, aggregating the data per device per hour, and storing the results in a MySQL database. The data being processed comes from a table named devices with columns for device_id, temperature, location, and time.
 
-* The solution consists of a Python script named analytics.py, which performs the following steps:
+* The solution consists of a Python script named ``` analytics.py ``` , which performs the following steps:
 
 1. Waits for a data generator to start generating data.
 2. Connects to the PostgresSQL database and retrieves the earliest time value from the devices table.
@@ -13,7 +13,7 @@
 
 
 ## Requirements
-The following packages are required to run the analytics.py script:
+The following packages are required to run the ``` analytics.py ``` script:
 
 - psycopg2 or psycopg2-binary for connecting to PostgresSQL
 - mysql-connector-python for connecting to MySQL
@@ -28,7 +28,7 @@ To run the analytics.py script, first make sure you have set the following envir
 
 Then, simply run the following command:
 
-** python analytics.py **
+``` python analytics.py ``` 
 The script will start executing and will run indefinitely until manually stopped.
 
 ## Configuration
